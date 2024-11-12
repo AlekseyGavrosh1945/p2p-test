@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: p2p-test
+    container_name: p2p-test
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - projectx_test_infra_projectX_network
+      - default
+    extra_hosts:
+          - "projectx_test_infra-nginx-1:172.18.0.5"
+
+  nginx:
+    image: nginx:1.19.3
+    restart: unless-stopped
+    ports:
+      - "8024:80"
+    volumes:
+      - .:/var/www
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+
+networks:
+  projectx_test_infra_projectX_network:
+    external: true
+
+volumes:
+  db_data:

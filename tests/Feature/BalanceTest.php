@@ -28,14 +28,13 @@ class BalanceTest extends MainTest
         ]);
 
         $responseBody = json_decode($response->getBody()->getContents(), true);
-        \Illuminate\Support\Facades\Log::info(print_r("testBalanceTrader = " . date("Y-m-d H:i:s"), true));
-        \Illuminate\Support\Facades\Log::info(print_r($responseBody, true));
 
         if (!empty($responseBody)) {
             $balance = $responseBody['balance'];
             $balance_outcome = $responseBody['balance_outcome'];
             $frozen_balance = $responseBody['frozen_balance'];
             $total_income = $responseBody['total_income'];
+
             $trader = DB::table('core_trader as ct')
                     ->join('core_user as cu', 'ct.user_ptr_id', '=', 'cu.id')
                     ->where('cu.username', $this->usernameTrader)->first();

@@ -30,10 +30,6 @@ class MainTest extends TestCase
         $this->usernameTrader = env('USERNAME_TRADER');
         $this->tokenMerch = $this->getToken($this->usernameMerch, env('PASSWORD_MERCH'));
         $this->tokenTrader = $this->getToken($this->usernameTrader, env('PASSWORD_TRADER'));
-
-        \Illuminate\Support\Facades\Log::info(print_r("MainTest = " . date("Y-m-d H:i:s"), true));
-        \Illuminate\Support\Facades\Log::info(print_r("tokenMerch - " .  $this->tokenMerch, true));
-        \Illuminate\Support\Facades\Log::info(print_r("tokenTrader - " .  $this->tokenTrader, true));
     }
 
     /**
